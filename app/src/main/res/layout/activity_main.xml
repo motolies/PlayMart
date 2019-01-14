@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.motolies.playmart.MainActivity"
+    android:padding="0dp">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="16dp"
+            android:id="@+id/barCodeMenu">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <ImageButton
+                    android:id="@+id/scanBarCode"
+                        android:padding="0dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/barcode"
+                    android:background="@android:color/transparent"
+                        android:onClick="onClick_scanBarCode"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp" />
+
+                <RadioGroup
+                    android:layout_height="match_parent"
+                        android:id="@+id/chkGroup"
+                        android:paddingLeft="10dp"
+                    android:layout_columnSpan="4"
+                    android:orientation="vertical"
+                        android:layout_alignBottom="@+id/scanBarCode"
+                        android:layout_toRightOf="@+id/scanBarCode"
+                        android:layout_toEndOf="@+id/scanBarCode"
+                    android:layout_width="wrap_content">
+
+                    <RadioButton
+                        android:text="추가"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/chkAdd"
+                        android:layout_alignBottom="@+id/scanBarCode"
+                        android:layout_toRightOf="@+id/scanBarCode"
+                        android:layout_toEndOf="@+id/scanBarCode"
+                        android:checked="true" />
+
+                    <RadioButton
+                            android:text="제거"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/chkDel"
+                            android:layout_alignBaseline="@+id/chkAdd"
+                            android:layout_alignBottom="@+id/chkAdd"
+                            android:layout_toRightOf="@+id/chkAdd"
+                            android:layout_toEndOf="@+id/chkAdd" />
+
+                    </RadioGroup>
+
+            </LinearLayout>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_columnSpan="3"
+                android:id="@+id/cartList"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/list_border"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
