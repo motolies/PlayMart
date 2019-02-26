@@ -47,6 +47,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
@@ -133,6 +134,24 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   @Override
   public void onCreate(Bundle icicle) {
     super.onCreate(icicle);
+
+
+    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            == PackageManager.PERMISSION_GRANTED) {
+      // Permission is already available, start camera preview
+      Toast.makeText(this,"camera permission granted",Toast.LENGTH_LONG).show();
+
+
+    } else {
+      // Permission is missing and must be requested.
+      requestCameraPermission();
+    }
+
+
+
+
+
+
 
     Window window = getWindow();
     window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -766,4 +785,34 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   public void drawViewfinder() {
     viewfinderView.drawViewfinder();
   }
+
+  private void requestCameraPermission() {
+    // Permission has not been granted and must be requested.
+    if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+            Manifest.permission.CAMERA)) {
+      // Provide an additional rationale to the user if the permission was not granted
+      // and the user would benefit from additional context for the use of the permission.
+      // Display a SnackBar with cda button to request the missing permission.
+      Toast.makeText(this, "Camera access is required to Scan The Barcode.",
+              Toast.LENGTH_LONG).show();
+
+
+      // Request the permission
+      ActivityCompat.requestPermissions(CaptureActivity.this,
+              new String[]{Manifest.permission.CAMERA},
+              PERMISSION_REQUEST_CAMERA);
+
+
+
+    } else {
+      Toast.makeText(this,
+              "<b>Camera could not be opened.</b>\\nThis occurs when the camera is not available (for example it is already in use) or if the system has denied access (for example when camera access has been disabled).", Toast.LENGTH_SHORT).show();
+      // Request the permission. The result will be received in onRequestPermissionResult().
+      ActivityCompat.requestPermissions(this,
+              new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
+    }
+  }
+
+
+
 }

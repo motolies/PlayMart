@@ -42,7 +42,6 @@
             </intent-filter>
         </activity>
         <activity
-
             android:name=".InsertActivity"
             android:theme="@style/Theme.Transparent" ></activity>
 
